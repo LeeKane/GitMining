@@ -1,0 +1,472 @@
+
+    <link href="/GitMining/static/css/iso.css" rel="stylesheet">
+    <link href="/GitMining/static/css/github.css" media="all" rel="stylesheet">
+    <link href="/GitMining/static/css/repo.css" type="text/css" rel="stylesheet">
+    <script src="/GitMining/static/js/echarts.js"></script>
+    <nav class="top-nav">
+        <div class="container">
+            <div class="nav-wrapper"><a class="page-title">User Statistics</a></div>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col s12 m8 l8 offset-l1">
+            <div id="Location" class="section scrollspy">
+     <div class="card-panel teal2" >
+         <div class="col s12"><br></div>
+         <div class="col s12"><br></div>
+         <div class="col s12"><br></div>
+         <div class="col s12"><br></div>
+         <div class="col s12"><br></div>
+         <div class="col s12"><br></div>
+         <div class="col s12"><br></div>
+            <div class="col s12"><br></div>
+            <div class="col s12"><br></div>
+            <div class="col s12"><br></div>
+            <div class="col s12"><br></div>
+            <div class="col s12"><br></div>
+             <div class="col s12"><br></div>
+            <div class="col s12"><br></div>
+            <div class="col s12"><br></div>
+            <div class="col s12"><br></div>
+            <div class="col s12"><br></div>
+      		  <div class="col s12 m6 l6">
+                    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                    <div id="main" style="width: 500px;height:430px;"></div>
+                    <script type="text/javascript">
+                        // 基于准备好的dom，初始化echarts实例
+                        var myChart = echarts.init(document.getElementById('main'));
+
+                        // 指定图表的配置项和数据
+                        var option = {
+//                            title: {
+//                                text: 'github用户分布',
+//                                left:'center',
+//                                top: 'bottom',
+//                                textStyle:{
+//                                    fontWeight:'bolder'
+//                                }
+//                            },
+
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b}: {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                x: 'left',
+                                y:'top',
+                                data:['USA','Other','Asia','Europe','Canada','Australia','Brazil','Russia','China','Japan','India','Germany','UK','France']
+                            },
+                            series: [
+                                {
+                                    name:'用户分布',
+                                    type:'pie',
+                                    selectedMode: 'single',
+                                    radius: [0, '30%'],
+                                    center:['57%','45%'],
+
+                                    label: {
+                                        normal: {
+                                            position: 'inner'
+                                        }
+                                    },
+                                    labelLine: {
+                                        normal: {
+                                            show: false
+                                        }
+                                    },
+                                    data:[
+                                        {value:$!result.country.usa, name:'USA', selected:true},
+                                        {value:$!result.country.canada+$!result.country.australia+$!result.country.brazil+$!result.country.russia, name:'Other'},
+                                        {value:$!result.country.china+$!result.country.japan+$!result.country.india, name:'Asia'},
+                                        {value:$!result.country.germany+$!result.country.uk+$!result.country.france, name:'Europe'},
+                                    ]
+                                },
+                                {
+                                    name:'用户分布',
+                                    type:'pie',
+                                    radius: ['40%', '55%'],
+                                    center:['57%','45%'],
+
+                                    data:[
+                                        {value:$!result.country.usa, name:'USA'},
+                                        {value:$!result.country.brazil, name:'Brazil'},
+                                        {value:$!result.country.canada, name:'Canada'},
+                                        {value:$!result.country.australia, name:'Australia'},
+                                        {value:$!result.country.russia, name:'Russia'},
+                                        {value:$!result.country.china, name:'China'},
+                                        {value:$!result.country.japan, name:'Japan'},
+                                        {value:$!result.country.india, name:'India'},
+                                        {value:$!result.country.uk, name:'UK'},
+                                        {value:$!result.country.germany, name:'Germany'},
+                                        {value:$!result.country.france, name:'France'}
+                                    ]
+                                }
+                            ]
+                        };
+
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart.setOption(option);
+                    </script>
+                </div>
+
+
+ <div class="col s12"><br></div>
+ <div class="col s4 offset-s5">
+
+            <div class="col s12 m6 l6">
+
+                        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                        <div id="main2" style="width: 400px;height:400px;"></div>
+                        <script type="text/javascript">
+                            // 基于准备好的dom，初始化echarts实例
+                            var myChart = echarts.init(document.getElementById('main2'));
+
+                            var option = {
+                                tooltip : {
+
+                                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                    }
+                                },
+                                legend: {
+                                    data:['States']
+                                },
+                                grid: {
+                                    left: '3%',
+                                    right: '4%',
+                                    bottom: '3%',
+                                    containLabel: true
+                                },
+                                xAxis : [
+                                    {
+                                    splitLine: {
+            								show: false
+            								},
+                                        type : 'category',
+                                        data : ['California','Texas','Missouri','Michigan','Pennsylvania','New York']
+                                    }
+                                ],
+                                yAxis : 
+                                    { 
+                                        type : 'value'
+                                    }
+                                ,
+                                series : [
+                                    {
+                                        name:'States',
+                                        type:'bar',
+                                        data:[$!result.states.California, $!result.states.Texas, $!result.states.Missouri, $!result.states.Michigan, $!result.states.Pennsylvania, $!result.states.New_York],
+                                        barMaxWidth:'20',
+                                        itemStyle: {
+                                            normal: {
+                                                color: '#91C7AE'
+                                            }
+
+                                        },
+
+                                    },{
+                                        name: 'Users in California',
+                                        type: 'pie',
+                                        radius : '25%',
+                                        center: ['65%', '35%'],
+                                        data:[
+                                            {value:$!result.states.Los_Angeles, name:'Los Angeles'},
+                                            {value:$!result.states.San_Francisco, name:'SanFrancisco'},
+                                            {value:$!result.states.Other,name:'Other'}
+
+                                        ],
+                                        itemStyle: {
+                                            emphasis: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        }
+                                    }
+                                ]
+                            };
+                            myChart.setOption(option);
+                        </script>
+                    </div>
+                    </div>
+
+ <div class="col s12"><br></div>
+  <div class="col s12"><br></div>
+  <div class="col s12"><br></div>
+
+        <div class="col s12 m6 l6">
+
+                    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                    <div id="main3" style="width: 370px;height:370px;"></div>
+                    <script type="text/javascript">
+                        // 基于准备好的dom，初始化echarts实例
+                        var myChart = echarts.init(document.getElementById('main3'));
+                        myChart.showLoading();
+                        var google=[];
+                         #foreach( $num in $result.companyTime.google)
+                             google.push($num);
+                         #end
+                        var github=[];
+                            #foreach( $num in $result.companyTime.github)
+                            github.push($num);
+                            #end
+                        var microsoft=[];
+                            #foreach( $num in $result.companyTime.microsoft)
+                            microsoft.push($num);
+                            #end
+                        var shopify=[];
+                            #foreach( $num in $result.companyTime.shopify)
+                            shopify.push($num);
+                            #end
+                        var twitter=[];
+                            #foreach( $num in $result.companyTime.twitter)
+                            twitter.push($num);
+                            #end
+                        var facebook=[];
+                            #foreach( $num in $result.companyTime.facebook)
+                            facebook.push($num);
+                            #end
+                            
+                        var option = {
+
+                            tooltip : {
+                                trigger: 'axis'
+                            },
+                            legend: {
+                                data:['google','github','shopify','facebook','microsoft','twitter']
+                            },
+                            grid: {
+                                left: '0%',
+                                right: '6%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis : [
+                                {splitLine: {
+            								show: true,lineStyle: {
+                color: '#ddd',
+                type: 'dashed'
+            }
+            								},
+                                    type : 'category',
+                                    boundaryGap : false,
+                                    data : ['2007','2008','2009','2010','2011','2012','2013','2014','2015']
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                splitLine: {
+            								show: true
+            								},
+                                    type : 'value',
+                                    max: 100
+                                }
+                            ],
+                            series : [
+                                {
+                                    name:'google',
+                                    type:'line',
+//                                    stack: 'user',
+//                                    areaStyle: {normal: {}},
+                                    smooth:'true',
+                                    data:google
+                                },
+
+                                {
+                                    name:'github',
+                                    type:'line',
+                                    smooth:'true',
+//                                    stack: 'user',
+//                                    areaStyle: {normal: {}},
+                                    data:github
+                                },
+                                {
+                                    name:'shopify',
+                                    type:'line',
+                                    smooth:'true',
+//                                    stack: 'user',
+//                                    areaStyle: {normal: {}},
+                                    data:shopify
+                                },
+                                {
+                                    name:'facebook',
+                                    type:'line',
+                                    smooth:'true',
+//                                    stack: 'user',
+//                                    areaStyle: {normal: {}},
+                                    data:facebook
+                                },
+                                {
+                                    name:'microsoft',
+                                    type:'line',
+                                    smooth:'true',
+//                                    stack: 'user',
+//                                    areaStyle: {normal: {}},
+                                    data:microsoft
+                                },{
+                                    name:'twitter',
+                                    type:'line',
+                                    smooth:'true',
+//                                    stack: 'user',
+//                                    areaStyle: {normal: {}},
+                                    data:twitter
+                                }
+                            ]
+                        };
+                        myChart.hideLoading();
+                        myChart.setOption(option);
+                    </script>
+                </div>
+
+
+
+
+        <div class="col s12 m6 l6">
+
+                    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                    <div id="main4" style="width: 370px;height:370px;"></div>
+                    <script type="text/javascript">
+                        // 基于准备好的dom，初始化echarts实例
+                        var myChart = echarts.init(document.getElementById('main4'));
+                        var option = {
+                            tooltip: {},
+                            grid: {
+                                left: '1%',
+                                right: '11%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            legend: {
+                                data:['Blog Counts']
+                            },
+                            xAxis: {
+                            splitLine: {
+            								show: false
+            								},
+                                name: 'blogsites',
+                                data: ['Twitter','github','co','blogspot','linkedin','wordpress','google',
+                                    'stackoverflow']
+                            },
+                            itemStyle: {
+                                            normal: {
+                                                color: '#619FA7'
+                                            }
+
+                                        },
+                            yAxis: {
+                            splitLine: {
+            								show: false
+            								},
+                                name: 'Numbers',
+                            },
+                            series: [{
+                                name: 'Blog Counts',
+                                type: 'bar',
+                                barMaxWidth:20,
+                                data: [$result.blog.twitter,$result.blog.github,$result.blog.co,$result.blog.blogspot,$result.blog.linkedin,$result.blog.wordpress,$result.blog.google,$result.blog.stackoverflow]
+                            }]
+                        };
+
+                        myChart.setOption(option);
+                    </script>
+                </div>
+
+ <div class="col s12"><br></div>
+ <div class="col s12"><br></div>
+ <div class="col s12"><br></div>
+ <div class="col s12"><br></div>
+ <div class="col s12"><br></div>
+ <div class="col s12"><br></div>
+ <div class="col s12"><br></div>
+ <div class="col s12"><br></div>
+ <div class="col s12"><br></div>
+
+ <div class="col s3 offset-s2">
+        <div class="col s12 m6 l6">
+
+                    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                    <div id="main5" style="width: 500px;height:500px;"></div>
+                    <script type="text/javascript">
+                        // 基于准备好的dom，初始化echarts实例
+                        var myChart = echarts.init(document.getElementById('main5'));
+                        var option = {
+                            tooltip : {
+                                trigger: 'axis',
+                                showDelay : 0,
+                                axisPointer:{
+                                    show: true,
+                                    type : 'cross',
+                                    lineStyle: {
+                                        type : 'dashed',
+                                        width : 1
+                                    }
+                                },
+                                zlevel: 1
+                            },
+                            legend: {
+                                data:['sin']
+                            },
+                            toolbox: {
+                                show : true,
+                                feature : {
+                                    mark : {show: true},
+                                    dataZoom : {show: true},
+
+                                    restore : {show: true},
+
+                                }
+                            },
+                            xAxis : [
+                                {
+                                    type : 'value',
+                                    max:1350,
+                                    scale:true
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value',
+                                    max:'dataMax',
+                                    scale:true
+                                }
+                            ],
+                            series : [
+                                {
+                                    name:'user',
+                                    type:'scatter',
+                                    large: true,
+                                    symbolSize: 3,
+                                    data: (function () {
+                                        var d = [];
+                                        #foreach($user in $result.user)
+                                            d.push([$user.getPublic_repos(),$user.getFollowers()])
+                                        #end
+                                        //console.log(d)
+                                        return d;
+                                    })()
+                                }
+                            ]
+                        };
+
+                        myChart.setOption(option);
+                    </script>
+                </div>
+
+            </div>
+
+        </div>
+            </div>
+        </div>
+        <!-- Table of Contents -->
+        <div class="col hide-on-small-only m2 l1">
+            <div class="toc-wrapper">
+                <div style="height: 1px;">
+                    <ul class="section table-of-contents">
+                        <li><a href="#Location">Location</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+</div>

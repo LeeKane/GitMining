@@ -1,0 +1,103 @@
+<nav class="top-nav">
+    <div class="container">
+        <div class="nav-wrapper"><a class="page-title">About</a></div>
+    </div>
+</nav>
+
+<div class="section" id="index-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m9">
+        <h1 class="header center-on-small-only">About</h1>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!--  Outer row  -->
+  <div class="row">
+
+    <div class="col s12 m9 l10">
+      <!--  We Help Find Repositories Easily -->
+      <div id="gitmining" class="section scrollspy">
+          <h2 class="header">We Help Find Repositories Easily</h2>
+          <p class="caption">We divide repositories into several classifications. You can search repositories by types, languages, create years......</p>
+      </div>
+
+      <!--  About the Team-->
+      <div id="team" class="section scrollspy">
+        <div class="row">
+          <h2 class="header">Meet the Team</h2>
+          <p class="caption">We are a team of students from Nanjing University.</p>
+        </div>
+        <br />
+
+        <div class="row">
+          <div class="col s12 m3 center-on-small-only">
+            <div class="image-container">
+              <img src="static/images/dyf.png">
+            </div>
+          </div>
+          <div class="col s12 m9">
+            <h4>Di Yifeng</h4>
+            <p>Di Yifeng is a studeng from Nanjing University, Software Institute.</p>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 m3 center-on-small-only">
+              <div class="image-container">
+                <img src="static/images/lk.png">
+              </div>
+            </div>
+          <div class="col s12 m9">
+            <h4>Li Kai</h4>
+            <p>Li Kai is a studeng from Nanjing University, Software Institute.</p>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 m3 center-on-small-only">
+              <div class="image-container">
+                <img src="static/images/lzh.png">
+              </div>
+            </div>
+          <div class="col s12 m9">
+            <h4>Li Zhenhao</h4>
+            <p>Li Zhenhao is a studeng from Nanjing University, Software Institute.</p>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 m3 center-on-small-only">
+              <div class="image-container">
+                <img src="static/images/csy.png">
+              </div>
+            </div>
+          <div class="col s12 m9">
+            <h4>Cao Shuyue</h4>
+            <p>Cao Shuyue is a studeng from Nanjing University, Software Institute.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Table of Contents -->
+    <div class="col hide-on-small-only m3 l2">
+      <div class="toc-wrapper">
+        <div style="height: 1px;">
+          <ul class="section table-of-contents">
+            <li><a href="#gitmining">GitMining</a></li>
+            <li><a href="#team">Meet the Team</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div> <!-- End Container -->
+
+
+

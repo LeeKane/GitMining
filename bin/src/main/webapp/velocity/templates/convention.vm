@@ -1,0 +1,182 @@
+#set($layout="indexlayout.vm")
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description"
+          content="Materialize is a modern responsive CSS framework based on Material Design by Google. ">
+    <title>GitMining</title>
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="/GitMining/static/images/favicon/apple-touch-icon-152x152.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="/GitMining/static/images/favicon/mstile-144x144.png">
+    <link rel="icon" href="/GitMining/static/images/favicon/favicon-32x32.png" sizes="32x32">
+    <!--  Android 5 Chrome Color-->
+    <meta name="theme-color" content="#EE6E73">
+    <!-- CSS-->
+    <!--<link href="https://github.com/favicon.ico" rel="shortcut icon" />-->
+    <link href="/GitMining/static/css/prism.css" rel="stylesheet">
+    <link href="/GitMining/static/css/ghpages-materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/GitMining/static/components/bootstrap/docs/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/GitMining/static/components/flat-ui/css/flat-ui.css">
+    <link rel="stylesheet" href="/GitMining/static/stylesheets/pictonic.css">
+    <link rel="stylesheet" href="/GitMining/static/stylesheets/monokai.css">
+    <link rel="stylesheet" href="/GitMining/static/stylesheets/style.css">
+</head>
+
+<body>
+    #parse('head.vm')
+
+    <nav class="top-nav">
+        <div class="container">
+            <div class="nav-wrapper"><a class="page-title">Convention on GitHub</a></div>
+        </div>
+    </nav>
+
+    <div id="mainwrap">
+    <div class="contents container">
+        <div class="head">
+            <h2>Analyze Github commits to know which convention is popular.</h2>
+            <h1>Choose language.</h1></div>
+        <div class="languagebox">
+            <div data-lang="js" title="JavaScript" class="language">
+                <div class="icon-prog-js01"></div>
+                <p>JavaScript</p>
+            </div>
+            <div data-lang="java" title="Java" class="language">
+                <div class="icon-prog-java"></div>
+                <p>Java</p>
+            </div>
+            <div data-lang="py" title="Python" class="language">
+                <div class="icon-prog-python"></div>
+                <p>Python</p>
+            </div>
+            <div data-lang="scala" title="Scala" class="language">
+                <div class="icon-prog-scala"></div>
+                <p>Scala</p>
+            </div>
+            <div data-lang="rb" title="Ruby" class="language">
+                <div class="icon-prog-ruby"></div>
+                <p>Ruby</p>
+            </div>
+            <div data-lang="cs" title="C#" class="language">
+                <div class="icon-prog-csharp"></div>
+                <p>C#</p>
+            </div>
+            <div data-lang="php" title="PHP" class="language">
+                <div class="icon-prog-php01"></div>
+                <p>PHP</p>
+            </div>
+        </div>
+        <div id="conventionWrap">
+            <div class="notices">
+                <time><span class="icons fui-bubble-16"></span> Dec 27, 2014</time>
+                <article>I made this project about a year ago. At that time, I just started it for
+                    <a href="https://github.com/blog/1450-the-github-data-challenge-ii" target="_blank">The GitHub Data Challenge II</a>. So, it was very simple and concise implementaion for proof of concept. I've been aggregated convention data for
+                    a year. However, It is not analyze conventions of our codes deeply. I think therefore it's meaningless to keep aggregating more data. Finally, I decided to stop aggregating. I only hope someone get insight from this project and
+                    make much better projects.</article>
+                <time><span class="icons fui-bubble-16"></span> Mar 10, 2014</time>
+                <article>fixed a error in "Parentheses around arguments in def" of Ruby. See <a href="https://github.com/outsideris/popularconvention/issues/50">issue #50</a> for more details. The convention was reset.</article>
+                <time><span class="icons fui-bubble-16"></span> Dec 13, 2013</time>
+                <article>added conding convention for PHP (Issue <a href="https://github.com/outsideris/popularconvention/issues/25" target="_target">#25</a>)
+                    <br>
+                    <a href="https://github.com/potherca" target="_target">Ben Peachey</a> helped to add it by writing
+                    <a href="https://gist.github.com/potherca/6719201" target="_target">Popular Coding Convention in PHP on Github</a>. Thanks Ben.</article>
+                <time><span class="icons fui-bubble-16"></span> Sep 20, 2013</time>
+                <article>added coding convention for C#.
+                    <br>
+                    <a href="https://github.com/Haacked" target="_target">Phil Haack</a> help to add this convention by writing
+                    <a href="https://gist.github.com/Haacked/6601104" target="_target">C# convention guide</a>. Thanks Phil.</article>
+                <time><span class="icons fui-bubble-16"></span> Aug 12, 2013</time>
+                <article>added coding convention for Ruby.
+                    <br> If there are something wrong in ruby convention or you want to see another coding convention Please leave issues on <a href="https://github.com/outsideris/popularconvention/issues" target="_target">Github Issues</a>. Because I'm
+                    not the rubist.</article>
+                <time><span class="icons fui-bubble-16"></span> July 21, 2013</time>
+                <article>added "single quote vs double quotes" convention for JavaScript.</article>
+                <time><span class="icons fui-bubble-16"></span> July 17, 2013</time>
+                <article>I made this site for proof of my concept at
+                    <a href="https://github.com/blog/1450-the-github-data-challenge-ii" target="_blank">The GitHub Data Challenge II</a>.
+                    <br> Amazing thing happened. This project placed in second on
+                    <a href="https://github.com/blog/1544-data-challenge-ii-results" target="_blank">Data Challenge II Results</a> and a lot of people like my idea.
+                    <br> So, I decided to serve as a service and aggregate more convention data continuously.
+                    <br> I reseted convention data at all and aggregate newly since old data structure isn't efficient and has some bugs.
+                    <br> And convention data can be reset sometimes when I found some bugs.
+                    <br>
+                    <br> Please leave issues on <a href="https://github.com/outsideris/popularconvention/issues" target="_target">Github</a> if you have some problems or opinion.
+                    <br> Thank you for your interest.
+
+                </article>
+            </div>
+        </div>
+        <div class="footer-push"></div>
+    </div>
+</div>
+
+    #parse('footer.vm')
+
+<script type="text/javascript" src="/GitMining/static/components/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/GitMining/static/components/d3/d3.min.js"></script>
+<script type="text/javascript" src="/GitMining/static/components/handlebars.js/dist/handlebars.js"></script>
+<script type="text/javascript" src="/GitMining/static/javascripts/script.js"></script>
+<script id="conventionSection" type="text/x-handlebars-template">{{#each scores}} {{#ifh title}}
+<section>
+    <h2><span class="fui-checkround-24"></span>{{title}}</h2>
+    <div class="graph">
+        <div class="chart">
+            <input type="hidden" value="{{@key}}" class="dataname">
+            <div class="sidebar">
+                <ul>{{#each column}}
+                    <li>
+                        <div class="icons fui-menu-24"></div>
+                        <div class="text">
+                            <h3>{{getScore ../this}} %</h3>{{this.display}}</div>
+                    </li>{{/each}}
+                    <li class="commits">based on {{getCommitCount commits}} commits</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="examplebox">{{#each column}}
+        <div class="example">
+            <h4><span class="fui-bubble-16"></span>{{display}}</h4><pre><code>{{{code}}}</code></pre></div>{{/each}}</div>
+</section>{{/ifh}} {{/each}}
+</script>
+<script id="spiner" type="text/x-handlebars-template">
+<script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1316180-4']);
+    _gaq.push(['_setDomainName', '.sideeffect.kr']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<script>if (!window.jQuery) {
+    document.write('<script src="/GitMining/static/bin/jquery-2.1.1.min.js"><\/script>');
+}
+</script>
+<script src="/GitMining/static/js/iso.js"></script>
+<script src="/GitMining/static/js/obelisk.min.js"></script>
+<script src="/GitMining/static/js/jquery.timeago.min.js"></script>
+<script src="/GitMining/static/js/prism.js"></script>
+<script src="/GitMining/static/jade/lunr.min.js"></script>
+<script src="/GitMining/static/jade/search.js"></script>
+<script src="/GitMining/static/bin/materialize.js"></script>
+<script src="/GitMining/static/js/init.js"></script>
+
+</body>
+
+</html>

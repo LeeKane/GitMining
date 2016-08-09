@@ -1,0 +1,119 @@
+  <div class="parallax-container" id="index-banner" >
+
+  <div class="container">
+      <br><br>
+      <br><br>
+      <br><br>
+
+      <h1 class="header center ">GitMining</h1>
+
+      <br><br>
+      <br>
+      <div class="row center white-text">Search what you are interested in on GitHub.</h5>
+      </div>
+      <br><br>
+      <div class="row center">
+          <a href="/GitMining/repos" id="download-button" class="btn-large waves-effect waves-light">Get Started</a>
+      </div>
+      <br><br>
+
+
+
+  <div class="parallax"><img src="static/images/back2.jpg" alt="Unsplashed background img 1" style="display: block;transform: translate3d(-50%, 0px, 0px);">
+  </div>
+  </div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <!--   Promo Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="center promo">
+            <i class="material-icons">visibility</i>
+            <p class="promo-caption">Find your favorite repos</p>
+            <p class="light center">    We did most of the heavy lifting for you to search a repository which you like most. Additionally, we refined tags and gradings to provide a smoother experience for developers.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="center promo">
+            <i class="material-icons">group</i>
+            <p class="promo-caption">Meet the exciting person</p>
+            <p class="light center">By utilizing tags and statistics of repositories, we were able to introduct some exciting person that according to the interests of users. </p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="center promo">
+            <i class="material-icons">equalizer</i>
+            <p class="promo-caption">Easy to see the statistics</p>
+            <p class="light center">We have provided detailed statistics as well as specific charts to help  users get started. We are also devotes in finding instersring conclusion from a large number of data of locations and languages.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="parallax-container" id="index-banner" >
+
+      <div class="container">
+          <br><br>
+          <br><br>
+          <br><br>
+          <br><br>
+          <br><br>
+          <h2 class="header center ">We Help Find Repositories Easily</h2>
+          </div>
+          <br><br>
+          <br><br>
+          <div class="parallax"><img src="static/images/back.jpg" alt="Unsplashed background img 1" style="display: block;transform: translate3d(-50%, 0px, 0px);">
+          </div>
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="section">
+          <!--   Promo Section   -->
+          <div class="row">
+              <div class="row">
+                  <h2 class="header center">Contact Us</h2>
+                  <p class="caption center">We are a team of students from Nanjing University.</p>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col s12 m3">
+
+                      <div class="image-container">
+                          <img src="static/images/lk.png">
+                          <h4>        Li Kai</h4>
+                      </div>
+              </div>
+              <div class="col s12 m3">
+
+                      <div class="image-container">
+                          <img src="static/images/dyf.png">
+                          <h4>Di Yifeng</h4>
+                      </div>
+              </div>
+              <div class="col s12 m3">
+
+                      <div class="image-container">
+                          <img src="static/images/lzh.png">
+                      </div>
+                      <h4>Li Zhenhao</h4>
+
+              </div>
+              <div class="col s12 m3">
+
+                      <div class="image-container">
+                          <div class="image-container">
+                              <img src="static/images/csy.png">
+                          </div>
+                          <h4>Cao Shuyue</h4>
+
+              </div>
+          </div>
+
+             </div>

@@ -1,0 +1,268 @@
+<link href="/GitMining/static/css/iso.css" rel="stylesheet">
+<link href="/GitMining/static/css/github.css" media="all" rel="stylesheet">
+<link href="/GitMining/static/css/repo.css" type="text/css" rel="stylesheet">
+<script src="/GitMining/static/js/echarts.js"></script>
+
+<nav class="top-nav">
+    <div class="container">
+        <div class="nav-wrapper"><a class="page-title">Repository</a></div>
+    </div>
+</nav>
+
+<div class="container">
+        <div class="row">
+            <div class="col s12 m9 l10">
+            <div id="overview" class="section scrollspy">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row section">
+                            <div class="col s12 l6">
+                                    <span class="card-title">
+                                        <a href="/GitMining/user/content?id=$!result.repository.owner_id">
+                                            $!result.repository.owner_name
+                                        </a>
+                                        /
+                                        <a href="/GitMining/repository/content?id=$!result.repository.id">
+                                            $!result.repository.full_name
+                                        </a>
+                                    </span>
+                                <br>
+                                </br>
+                                <p>$!result.repository.description</p>
+                                <br>
+                                </br>
+                                <div class="row section">
+                                    <div class="col s12 l8">
+                                        <input type="text" value="$!result.repository.github_url" readonly="readonly">
+                                    </div>
+                                    <div class="col s12 l4">
+                                        <a class="waves-effect waves-light btn" target="_blank"
+                                           href="$!result.repository.github_url">See More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 l6">
+                                <div id="main" style="width: 300px;height:300px;"></div>
+                                <script type="text/javascript">
+                                    // 基于准备好的dom，初始化echarts实例
+                                    var myChart = echarts.init(document.getElementById('main'));
+                                    // 指定图表的配置项和数据
+                                    var option = {
+                                        title: {
+                                            text: 'Score of Repository(total:10)',
+                                            left: 'center',
+                                            top: 'top'
+
+                                        },
+                                        tooltip: {},
+                                        itemStyle: {
+                                            normal: {
+                                                color: '#60a59a'
+                                            }
+
+                                        },
+                                        radar: {
+                                            shape: 'circle',
+                                            radius: '60%',
+
+                                            indicator: [
+                                                {name: 'famous', max: 10},
+                                                {name: 'size', max: 10},
+                                                {name: 'hot', max: 10},
+                                                {name: 'popular', max: 10},
+                                                {name: 'mature', max: 10},
+                                                {name: 'contributor', max: 10}
+                                            ]
+                                        },
+                                        series: [{
+                                            name: 'Score',
+                                            type: 'radar',
+                                            // areaStyle: {normal: {}},
+                                            data: [
+                                                {
+                                                    value: [$result.scores.famous, $result.scores.size, $result.scores.hot, $result.scores.popular, $result.scores.mature, $result.scores.contributor],
+                                                    name: 'Score of Repository'
+                                                }
+                                            ]
+                                        }]
+                                    };
+
+                                    // 使用刚指定的配置项和数据显示图表。
+                                    myChart.setOption(option);
+                                </script>
+                            </div>
+                            <div class="number repo">
+                                <div class="col s12 l2">
+                                    <div class="star">
+                                        <div>
+                                            <span class="nums">$!result.repository.stargazers</span>
+                                        </div>
+                                        <span class="tips">stars</span>
+                                    </div>
+                                </div>
+                                <div class="col s12 l2">
+                                    <div class="fork">
+                                        <div>
+                                            <span class="nums">$!result.repository.fork_num</span>
+                                        </div>
+                                        <span class="tips">forks</span>
+                                    </div>
+                                </div>
+                                <div class="col s12 l3">
+                                    <div class="fork">
+                                        <div>
+                                            <span class="nums">$!result.repository.subscribers</span>
+                                        </div>
+                                        <span class="tips">subscribers</span>
+                                    </div>
+                                </div>
+                                <div class="col s12 l3">
+                                    <div class="fork">
+                                        <div>
+                                            <span class="nums">$!result.repository.contributor</span>
+                                        </div>
+                                        <span class="tips">contributors</span>
+                                    </div>
+                                </div>
+                                <div class="col s12 l2">
+                                    <div class="fork">
+                                        <div>
+                                            <span class="nums">$!result.repository.collaborator</span>
+                                        </div>
+                                        <span class="tips">collaborator</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+                <div id="recommend_tag" class="section scrollspy">
+                    <h5 class="materialize-red-text text-lighten-2">Recommend By Tag</h5>
+
+                    <div class="col s12">
+                        <div class="carousel">
+
+                            #foreach( $repo in $result.relatedRepos.tag)
+
+                                <a class="carousel-item" href="/GitMining/repository/content?id=$!{repo.id}">
+                                    <img src="https://github.com/identicons/$!{repo.owner_name}.png" alt=""
+                                         class="circle"></a>
+
+                            #end
+                        </div>
+                    </div>
+                </div>
+                <div id="recommend_owener" class="section scrollspy">
+                    <h5 class="materialize-red-text text-lighten-2">Recommend By Owener</h5>
+
+                    <div class="col s12">
+                        <div class="carousel">
+
+                            #foreach( $repo in $result.relatedRepos.owner)
+
+                                <a class="carousel-item" href="/GitMining/repository/content?id=$!{repo.id}">
+                                    <img src="https://github.com/identicons/$!{repo.owner_name}.png" alt=""
+                                         class="circle"></a>
+
+                            #end
+                        </div>
+                    </div>
+                </div>
+                <div id="commit" class="row">
+                    <div class="card">
+                    <div class="col s12">
+                        <ul class="tabs">
+                            <li class="tab col s3"><a class="active" href="#hehe">Commit</a></li>
+                            <li class="tab col s3"><a href="#issue">Issue</a></li>
+                        </ul>
+                    </div>
+                    </div>
+                    <div id ="hehe" class="col s12">
+                        <ul class="collapsible" data-collapsible="accordion">
+                            #foreach($i in [0..19])
+                            <li>
+
+                            	#if($!result.commit.get($i).message.length()>=90)
+                                <div class="collapsible-header"><i class="material-icons">filter_drama</i><span id="half$i">$!result.commit.get($i).message.substring(0,90) ...</span>
+                                    <a class="right" href="https://github.com/$!result.commit.get($i).repo_name/commit/$result.commit.get($i).sha">
+                                        Detail
+                                    </a>
+                                </div>
+
+                                <div class="collapsible-body "><h5>$!result.commit.get($i).message</h5><p>$!result.commit.get($i).commiter_name created at $!result.commit.get($i).date</p></div>
+                                #else
+                                <div class="collapsible-header"><i class="material-icons">filter_drama</i><span>$!result.commit.get($i).message</span>
+                                	<a class="right" href="https://github.com/$!result.commit.get($i).repo_name/commit/$result.commit.get($i).sha">
+                                        Detail
+                                    </a>
+                                </div>
+                                <div class="collapsible-body"><h5>$!result.commit.get($i).message</h5><p>$!result.commit.get($i).commiter_name created at $!result.commit.get($i).date</p></div>
+                                #end
+                                
+                            </li>
+                            #end
+##                            <li>
+##                                <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+##                                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+##                            </li>
+##                            <li>
+##                                <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+##                                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+##                            </li>
+                        </ul>
+					</div>
+                    <div id="issue" class="col s12">
+                    	<ul class="collapsible" data-collapsible="accordion">
+                            #if($!result.issue.size()==0)
+                                <li>
+                                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Not Found XD</div>
+                                    <div class="collapsible-body"><p>NONONO NO study! ;p</p></div>
+                                </li>
+                            #else
+                    		#foreach($i in [0..19])
+                    		<li>
+                                <div class="collapsible-header"><i class="material-icons">whatshot</i>$!result.issue.get($i).title
+                                	<a class="right" href="https://github.com/$!result.issue.get($i).repo_name/issues/$result.issue.get($i).number">
+                                        Detail
+                                    </a>
+                                    
+                                    <a class="right">
+                                    	<i class="material-icons">chat_bubble_outline</i>
+                                		$!result.issue.get($i).comment &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                	</a>
+                                </div>
+                                <div class="collapsible-body">
+                                	<h5>
+                                    <a href="http://Github.com/$!result.issue.get($i).user">$!result.issue.get($i).user:</a>
+                                    </h5>
+                                    <p>$!result.issue.get($i).body</p>
+                                </div>
+                            </li>
+                           	#end
+                            #end
+                        </ul>
+                    </div>
+                    	
+                </div>
+            </div>
+            <div class="col hide-on-small-only m3 l2">
+        <div class="toc-wrapper">
+            <div style="height: 1px;">
+                <ul class="section table-of-contents">
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#recommend_tag">Recommend By Tag</a></li>
+                    <li><a href="#recommend_owener">Recommend By Owner</a></li>
+                    <li><a href="#commit">Commit & Issue</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+        </div>
+</div>
+
+<script src="/GitMining/static/js/obelisk.min.js"></script>
+<script src="/GitMining/static/js/iso.js"></script>
+<script src="/GitMining/static/js/lab.js"></script>
+<script src="/GitMining/static/js/echarts.min.js"></script>
