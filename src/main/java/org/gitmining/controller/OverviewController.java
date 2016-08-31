@@ -42,6 +42,14 @@ public class OverviewController {
 	public ModelAndView getAboutView(HttpServletRequest request) throws Exception {
 		return new ModelAndView("about");
 	}
+	@RequestMapping(value = "/person")
+	public ModelAndView getPersonView(HttpServletRequest request) throws Exception {
+		return new ModelAndView("person");
+	}
+	@RequestMapping(value = "/login")
+	public ModelAndView getLoginView(HttpServletRequest request) throws Exception {
+		return new ModelAndView("login");
+	}
 
 	@RequestMapping(value = "/language")
 	public ModelAndView getLanguageDiscoveryView(HttpServletRequest request) throws Exception {

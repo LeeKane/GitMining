@@ -22,6 +22,11 @@
                 <object id="front-page-logo" type="image/svg+xml" data="/GitMining/static/res/materialize.svg">Your browser does not support SVG</object></a>
 
 
+
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/GitMining/login" class="waves-effect waves-teal"><i class="material-icons left">perm_identity</i></a></li>
+            </ul>
+
             <ul class="right hide-on-med-and-down">
                 <li><a href="/GitMining/about" class="waves-effect waves-teal">About</a></li>
             </ul>
