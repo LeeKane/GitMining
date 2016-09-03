@@ -1,5 +1,6 @@
 package org.gitmining.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -11,17 +12,7 @@ import java.util.TreeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.gitmining.bean.ActionTime;
-import org.gitmining.bean.Choice;
-import org.gitmining.bean.Commit;
-import org.gitmining.bean.Duration;
-import org.gitmining.bean.History;
-import org.gitmining.bean.Issue;
-import org.gitmining.bean.LanguageContri;
-import org.gitmining.bean.Languagetime;
-import org.gitmining.bean.Repository;
-import org.gitmining.bean.SimpleRepo;
-import org.gitmining.bean.Tag;
+import org.gitmining.bean.*;
 import org.gitmining.service.RepoByTagDataService;
 import org.gitmining.service.RepoDataService;
 import org.springframework.ui.ModelMap;
@@ -68,8 +59,22 @@ public class RepositoryDataController {
 			String temp = commit.getDate();
 			temp = temp.split("T")[0] + "  " + temp.split("T")[1];
 			commit.setDate(temp.substring(0, temp.length() - 1));
-
 		}
+
+		List<Contributor> contributors = repoDataService.getContributors(repo_id);
+		int totalContribution =0;
+		for (Contributor contributor:contributors) {
+			totalContribution+=contributor.getContributions();
+		}
+
+		List<Double> rates = new ArrayList<>();
+		DecimalFormat df = new DecimalFormat("#.00");
+		for (int i=0;i<contributors.size();i++) {
+			double rate =((double)contributors.get(i).getContributions())/totalContribution*100;
+			rate=Double.parseDouble(df.format(rate));
+			rates.add(rate);
+		}
+
 
 		List<Issue> issues = repoDataService.getAllIssue(repository.getFull_name());
 		String fullname = repository.getFull_name().split("/")[1];
@@ -84,6 +89,8 @@ public class RepositoryDataController {
 		map.put("type", "REPOSITORY");
 		map.put("commit", commits);
 		map.put("issue", issues);
+		map.put("contributor",contributors);
+		map.put("rate",rates);
 		return new ModelAndView("repoDetail", "result", map);
 	}
 

@@ -20,6 +20,7 @@ public class OrgDataController {
 	}
 	public void setOrgDataService(OrgDataService orgDataService) {
 		this.orgDataService = orgDataService;
+		
 	}
 	
 	@RequestMapping(value="/orgTotalData",method=RequestMethod.GET)

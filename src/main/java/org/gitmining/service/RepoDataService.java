@@ -27,4 +27,5 @@ public interface RepoDataService {
 	public List<ActionTime> getActiontime();	
 	public List<Duration> getDuration();
 	public List<LanguageContri> getLanguagecontri();
+	public List<Contributor> getContributors(int id);
 }

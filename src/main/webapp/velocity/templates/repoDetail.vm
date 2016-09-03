@@ -137,6 +137,37 @@
                     </div>
             </div>
         </div>
+
+                <div id="top_contributors" class="section scrollspy">
+                    <h5 class="materialize-red-text text-lighten-2">Top Contributors</h5>
+
+                    <div class = "col s12">
+                        #set($i=0)
+                        #foreach($contributor in $!result.contributor)
+                            <div class="col s6">
+                                <ul class="collection">
+                                    <li class="collection-item avatar" style="width: 100%">
+                                        <img src="https://avatars2.githubusercontent.com/u/$contributor.id" alt="" class="circle">
+                                        <span class="title">
+                                            <a href="/GitMining/user/content?id=$contributor.id">
+                                                <p>$contributor.getLogin()</p>
+                                            </a>
+                                            <div class="progress ">
+                                                  <div class="determinate red lighten-3" style="width: $!result.rate.get($i)%"></div>
+                                            </div>
+                                        </span>
+                                        <p>$!result.rate.get($i)%</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            #set($i=$i+1)
+                        #end
+                </div>
+
+                </div>
+
+
+
                 <div id="recommend_tag" class="section scrollspy">
                     <h5 class="materialize-red-text text-lighten-2">Recommend By Tag</h5>
 
@@ -154,7 +185,7 @@
                     </div>
                 </div>
                 <div id="recommend_owener" class="section scrollspy">
-                    <h5 class="materialize-red-text text-lighten-2">Recommend By Owener</h5>
+                    <h5 class="materialize-red-text text-lighten-2">Recommend By Owner</h5>
 
                     <div class="col s12">
                         <div class="carousel">
@@ -169,6 +200,8 @@
                         </div>
                     </div>
                 </div>
+                <div id="commit_issue" class="section scrollspy">
+                    <h5 class="materialize-red-text text-lighten-2">Commit & Issues</h5>
                 <div id="commit" class="row">
                     <div class="card">
                     <div class="col s12">
@@ -190,14 +223,14 @@
                                     </a>
                                 </div>
 
-                                <div class="collapsible-body "><h5>$!result.commit.get($i).message</h5><p>$!result.commit.get($i).commiter_name created at $!result.commit.get($i).date</p></div>
+                                <div class="collapsible-body "><h5 style="margin-left: 3%;margin-right: 3%">$!result.commit.get($i).message</h5><p>$!result.commit.get($i).commiter_name created at $!result.commit.get($i).date</p></div>
                                 #else
                                 <div class="collapsible-header"><i class="material-icons">filter_drama</i><span>$!result.commit.get($i).message</span>
                                 	<a class="right" href="https://github.com/$!result.commit.get($i).repo_name/commit/$result.commit.get($i).sha">
                                         Detail
                                     </a>
                                 </div>
-                                <div class="collapsible-body"><h5>$!result.commit.get($i).message</h5><p>$!result.commit.get($i).commiter_name created at $!result.commit.get($i).date</p></div>
+                                <div class="collapsible-body"><h5 style="margin-left: 3%;margin-right: 3%">$!result.commit.get($i).message</h5><p>$!result.commit.get($i).commiter_name created at $!result.commit.get($i).date</p></div>
                                 #end
                                 
                             </li>
@@ -217,7 +250,7 @@
                             #if($!result.issue.size()==0)
                                 <li>
                                     <div class="collapsible-header"><i class="material-icons">whatshot</i>Not Found XD</div>
-                                    <div class="collapsible-body"><p>NONONO NO study! ;p</p></div>
+                                    <div class="collapsible-body"><p>No description provided. ;p</p></div>
                                 </li>
                             #else
                     		#foreach($i in [0..19])
@@ -233,7 +266,7 @@
                                 	</a>
                                 </div>
                                 <div class="collapsible-body">
-                                	<h5>
+                                	<h5 style="margin-left: 3%;margin-right: 3%">
                                     <a href="http://Github.com/$!result.issue.get($i).user">$!result.issue.get($i).user:</a>
                                     </h5>
                                     <p>$!result.issue.get($i).body</p>
@@ -245,15 +278,18 @@
                     </div>
                     	
                 </div>
+                </div>
             </div>
+            <div id="ending" class="section scrollspy"></div>
             <div class="col hide-on-small-only m3 l2">
         <div class="toc-wrapper">
             <div style="height: 1px;">
                 <ul class="section table-of-contents">
                     <li><a href="#overview">Overview</a></li>
+                    <li><a href="#top_contributors">Top Contributors</a> </li>
                     <li><a href="#recommend_tag">Recommend By Tag</a></li>
                     <li><a href="#recommend_owener">Recommend By Owner</a></li>
-                    <li><a href="#commit">Commit & Issue</a></li>
+                    <li><a href="#commit_issue">Commit & Issue</a></li>
 
                 </ul>
             </div>

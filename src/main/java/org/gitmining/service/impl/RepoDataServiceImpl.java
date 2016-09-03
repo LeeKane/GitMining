@@ -7,10 +7,14 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.spy.memcached.MemcachedClient;
+import com.google.gson.reflect.TypeToken;
 
 import org.gitmining.bean.*;
 import org.gitmining.dao.RepositoryDao;
 import org.gitmining.service.RepoDataService;
+import org.gitmining.util.NetworkConnect;
+
+import static sun.misc.Version.println;
 
 public class RepoDataServiceImpl implements RepoDataService {
 
@@ -232,5 +236,22 @@ public class RepoDataServiceImpl implements RepoDataService {
 	public List<Issue> getAllIssue(String fn) {
 		return repositoryDao.getAllIssue(fn);
 	}
+
+	@Override
+	public List<Contributor> getContributors(int id){
+		Repository repo = getRepositoryById(id);
+		String fn = repo.getFull_name();
+		String httpUrl = "https://api.github.com/repos/";
+		String httpArg = fn+"/contributors";
+		List<Contributor> contributors = NetworkConnect.gson.fromJson(NetworkConnect.getJson(httpUrl,httpArg),new TypeToken<List<Contributor>>() {
+		}.getType());
+		if(contributors.size()>10) {
+			contributors = contributors.subList(0, 10);
+		}
+		return contributors;
+	}
+
+
+
 
 }

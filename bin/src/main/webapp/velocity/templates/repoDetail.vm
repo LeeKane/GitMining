@@ -9,6 +9,8 @@
     </div>
 </nav>
 
+
+
 <div class="container">
         <div class="row">
             <div class="col s12 m9 l10">
@@ -137,8 +139,12 @@
                     </div>
             </div>
         </div>
+        
+        
+        
+        
                 <div id="recommend_tag" class="section scrollspy">
-                    <h5 class="materialize-red-text text-lighten-2">Recommend By Tag</h5>
+                    <h5 class="materialize-red-text text-lighten-2">By Tag</h5>
 
                     <div class="col s12">
                         <div class="carousel">
@@ -260,7 +266,11 @@
         </div>
     </div>
         </div>
+        
+        
 </div>
+
+
 
 <script src="/GitMining/static/js/obelisk.min.js"></script>
 <script src="/GitMining/static/js/iso.js"></script>
