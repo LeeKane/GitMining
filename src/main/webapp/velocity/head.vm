@@ -1,3 +1,4 @@
+
 <header>
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
@@ -23,12 +24,12 @@
 
 
 
-            <ul class="right hide-on-med-and-down">
-                <li><a href="/GitMining/login" class="waves-effect waves-teal"><i class="material-icons left">perm_identity</i></a></li>
+            <ul class="right hide-on-med-and-down" id="user">
+                <li><a href="/GitMining/login" class="waves-effect waves-teal"><i class="material-icons left">perm_identity</i>${username}</a></li>
             </ul>
 
             <ul class="right hide-on-med-and-down">
-                <li><a href="/GitMining/about" class="waves-effect waves-teal">About</a></li>
+                <li><a href="/GitMining/about" class="waves-effect waves-teal" id="about">About</a></li>
             </ul>
 
             <ul class="right hide-on-med-and-down">
@@ -54,3 +55,13 @@
         </div>
     </nav>
 </header>
+<script>
+    var user=document.getElementById("user");
+    user.onChange=function(){
+        alert(user.innerHTML);
+##        if(user.innerHTML!="<li><a id="uname" href="/GitMining/login" class="waves-effect waves-teal"><i class="material-icons left">perm_identity</i></a></li>")
+##        {
+##            user.innerHTML="<li><a id="uname" href="/GitMining/login.do" class="waves-effect waves-teal"><i class="material-icons left">perm_identity</i>${username}</a></li>";
+##        }
+    }
+</script>

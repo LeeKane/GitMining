@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.gitmining.bean.Choice;
 import org.gitmining.bean.Repository;
@@ -17,6 +18,7 @@ import org.gitmining.bean.Tag;
 import org.gitmining.bean.User;
 import org.gitmining.service.RepoByTagDataService;
 import org.gitmining.service.UserDataService;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,9 +30,11 @@ public class OverviewController {
 
 	private RepoByTagDataService repoByTagDataService;
 	private UserDataService userDataService;
+	private String userName="";
 
 	@RequestMapping(value = "/overview")
-	public ModelAndView getOverviewView(HttpServletRequest request) throws Exception {
+	public ModelAndView getOverviewView(HttpSession httpSession,HttpServletRequest request) throws Exception {
+		httpSession.setAttribute("username","");
 		ModelMap result = new ModelMap();
 		result.put("type", "OVERVIEW");
 		List<Tag> firsTags = (ArrayList<Tag>) repoByTagDataService.listFirstTag();
@@ -40,15 +44,24 @@ public class OverviewController {
 
 	@RequestMapping(value = "/about")
 	public ModelAndView getAboutView(HttpServletRequest request) throws Exception {
+
 		return new ModelAndView("about");
 	}
-	@RequestMapping(value = "/person")
-	public ModelAndView getPersonView(HttpServletRequest request) throws Exception {
-		return new ModelAndView("person");
-	}
+
 	@RequestMapping(value = "/login")
 	public ModelAndView getLoginView(HttpServletRequest request) throws Exception {
-		return new ModelAndView("login");
+		ModelMap result = new ModelMap();
+		result.put("type", "LOGIN");
+		result.put("userName","admin");
+//		String userName=request.getParameter("");
+//		userName="admin";
+
+		return new ModelAndView("login","result",result);
+	}
+	@RequestMapping("login.do")
+	public ModelAndView login(HttpSession httpSession,String username, String password){
+		httpSession.setAttribute("username",username);
+		return new ModelAndView("person");
 	}
 
 	@RequestMapping(value = "/language")
@@ -59,6 +72,13 @@ public class OverviewController {
 	@RequestMapping(value = "/convention")
 	public ModelAndView getLanguageConventionView(HttpServletRequest request) throws Exception {
 		return new ModelAndView("convention");
+	}
+
+	@RequestMapping(value = "/")
+	public ModelMap getName(HttpServletRequest request) throws Exception{
+		ModelMap result = new ModelMap();
+		result.put("userName",userName);
+		return  result;
 	}
 
 	@RequestMapping(value = "/map")

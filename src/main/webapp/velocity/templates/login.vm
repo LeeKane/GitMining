@@ -1,38 +1,30 @@
 <div class="row">
     <div class="col  m6 offset-m3">
         <div class="card">
-
             <div class="card-content">
                 <p>            LOGIN TO YOUR ACCOUNT</p>
             </div>
             <div class="card-action">
                 <div class="row">
-                    <form class="col s12">
-                        <div class="row">
+                    <form class="col s12" action="/GitMining/login.do" method="post">
                             <div class="input-field col s10">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input id="icon_prefix" type="text" class="validate">
-                                <label for="icon_prefix">User Name</label>
+                                <input  type="text" class="validate" id="userName1" name="username">
+                                <label for="userName1">User Name</label>
                             </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="card-action">
-                <div class="row">
-                    <form class="col s12">
-                        <div class="row">
                             <div class="input-field col s10">
                                 <i class="material-icons prefix">lock</i>
-                                <input id="icon_prefix" type="text" class="validate">
-                                <label for="icon_prefix">Password</label>
+                                <input id="password1" type="text" class="validate" name="password">
+                                <label for="password1">Password</label>
                             </div>
+                        <div class="row">
+                        <br>
+                        <br>
+                        </div>
+                        <div class="row">
+                            <button class="waves-effect waves-light btn red lighten-3 col s3 offset-s7 bottom" type="submit" value="Login">Login</button>
                         </div>
                     </form>
-                    <div class="row">
-                        <a class="btn waves-effect waves-light red lighten-3 right" target="_blank"
-                           href="/GitMining/user/content?id=1840293">login</a>
-                    </div>
                 </div>
             </div>
         </div>
