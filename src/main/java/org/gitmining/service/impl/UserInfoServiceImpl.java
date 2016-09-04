@@ -1,13 +1,12 @@
 package org.gitmining.service.impl;
 
+import com.google.gson.reflect.TypeToken;
 import net.spy.memcached.MemcachedClient;
-import org.gitmining.bean.Repository;
-import org.gitmining.bean.Sort;
-import org.gitmining.bean.User;
-import org.gitmining.bean.UserScore;
+import org.gitmining.bean.*;
 import org.gitmining.dao.RepositoryDao;
 import org.gitmining.dao.UserDao;
 import org.gitmining.service.UserInfoService;
+import org.gitmining.util.NetworkConnect;
 
 import java.util.HashMap;
 import java.util.List;
@@ -92,6 +91,19 @@ public class UserInfoServiceImpl implements UserInfoService {
 		// TODO Auto-generated method stub
 
 		return getAllUsersStub();
+	}
+
+	@Override
+	public List<StarRepo> getStaredRepo(String login) {
+		String httpUrl = "https://api.github.com/users/";
+		String httpArg =login+"/starred";
+
+		List<StarRepo> repos = NetworkConnect.gson.fromJson(NetworkConnect.getJson(httpUrl,httpArg),new TypeToken<List<StarRepo>>() {
+		}.getType());
+		if(repos.size()>10){
+			repos = repos.subList(0,10);
+		}
+		return repos;
 	}
 
 	public List<User> getAllUsersStub() {

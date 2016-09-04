@@ -72,6 +72,7 @@
 				<prop key="contentType">text/html;charset=UTF-8</prop>
 			</props>
 		</property>
+	</bean>
 
 		<!--<mvc:interceptors>-->
 			<!--<mvc:interceptor>-->
