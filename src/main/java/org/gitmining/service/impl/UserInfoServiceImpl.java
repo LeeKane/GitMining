@@ -100,8 +100,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 		List<StarRepo> repos = NetworkConnect.gson.fromJson(NetworkConnect.getJson(httpUrl,httpArg),new TypeToken<List<StarRepo>>() {
 		}.getType());
-		if(repos.size()>10){
-			repos = repos.subList(0,10);
+		if(repos.size()>5){
+			repos = repos.subList(0,5);
 		}
 		return repos;
 	}

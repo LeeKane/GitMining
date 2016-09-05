@@ -10,14 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.gitmining.bean.Choice;
-import org.gitmining.bean.Repository;
-import org.gitmining.bean.SimpleRepo;
-import org.gitmining.bean.Sort;
-import org.gitmining.bean.Tag;
-import org.gitmining.bean.User;
+import org.gitmining.bean.*;
 import org.gitmining.service.RepoByTagDataService;
 import org.gitmining.service.UserDataService;
+import org.gitmining.service.UserInfoService;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +26,10 @@ public class OverviewController {
 
 	private RepoByTagDataService repoByTagDataService;
 	private UserDataService userDataService;
+
 	private String userName="";
+
+
 
 	@RequestMapping(value = "/overview")
 	public ModelAndView getOverviewView(HttpSession httpSession,HttpServletRequest request) throws Exception {
@@ -58,11 +57,7 @@ public class OverviewController {
 
 		return new ModelAndView("login","result",result);
 	}
-	@RequestMapping("login.do")
-	public ModelAndView login(HttpSession httpSession,String username, String password){
-		httpSession.setAttribute("username",username);
-		return new ModelAndView("person");
-	}
+
 
 	@RequestMapping(value = "/language")
 	public ModelAndView getLanguageDiscoveryView(HttpServletRequest request) throws Exception {

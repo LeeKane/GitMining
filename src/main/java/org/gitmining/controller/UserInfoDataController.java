@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,13 +39,22 @@ public class UserInfoDataController {
 	public void setUserDataService(UserDataService userDataService) {
 		this.userDataService = userDataService;
 	}
-	
 	public UserInfoService getUserInfoService() {
 		return userInfoService;
 	}
 	public void setUserInfoService(UserInfoService userInfoService) {
 		this.userInfoService = userInfoService;
 	}
+
+	@RequestMapping("login.do")
+	public ModelAndView login(HttpSession httpSession, String username, String password){
+		List<StarRepo> starRepos=userInfoService.getStaredRepo("kanet77");
+		ModelMap result = new ModelMap();
+		result.put("starRepos", starRepos);
+		httpSession.setAttribute("username",username);
+		return new ModelAndView("person","result",result);
+	}
+
 	@RequestMapping(value="/simpleUser")
 	public ModelAndView getUserView(HttpServletRequest request) throws Exception {
 		ModelMap result=new ModelMap();
