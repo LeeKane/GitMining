@@ -96,12 +96,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public List<StarRepo> getStaredRepo(String login) {
 		String httpUrl = "https://api.github.com/users/";
-		String httpArg =login+"/starred"+"?access_token=9389e7a747d56ab2a8193c8687f35dfd8e7f707f";
+		String httpArg =login+"/starred";
 
 		List<StarRepo> repos = NetworkConnect.gson.fromJson(NetworkConnect.getJson(httpUrl,httpArg),new TypeToken<List<StarRepo>>() {
 		}.getType());
-		if(repos.size()>5){
-			repos = repos.subList(0,5);
+		if(repos.size()>7){
+			repos = repos.subList(0,7);
 		}
 		return repos;
 	}

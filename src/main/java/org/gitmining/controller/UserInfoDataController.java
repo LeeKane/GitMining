@@ -69,7 +69,7 @@ public class UserInfoDataController {
 		User user = userInfoService.getUserInfo(user_id);
 		user.setCreated_at(user.getCreated_at().substring(0, 10));
 
-		List<StarRepo> starRepos = userInfoService.getStaredRepo(user.getLogin());
+		//List<StarRepo> starRepos = userInfoService.getStaredRepo(user.getLogin());
 
 		Map userScores = userInfoService.getUserScore(user_id);
 		
@@ -78,7 +78,7 @@ public class UserInfoDataController {
 		result.put("user", user);
 		result.put("score", userScores);
 		result.put("repos", relatedRepos);
-		result.put("stars",starRepos);
+		//result.put("stars",starRepos);
 		return new ModelAndView("user","result",result);
 	}	
 	

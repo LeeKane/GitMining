@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 
 public class NetworkConnect {
 	public static Gson gson = new Gson();
-	public static String token = "5de492fe8fff9510a2c0e84f250c669557502862";
+	public static String token = "fb2604d8bdac99a628d774dd7d2d530a925f9a30";
 
 	public static String getJson(String httpUrl, String httpArg) {
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();

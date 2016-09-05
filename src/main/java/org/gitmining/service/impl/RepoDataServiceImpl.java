@@ -242,7 +242,7 @@ public class RepoDataServiceImpl implements RepoDataService {
 		Repository repo = getRepositoryById(id);
 		String fn = repo.getFull_name();
 		String httpUrl = "https://api.github.com/repos/";
-		String httpArg = fn+"/contributors"+"?access_token=9389e7a747d56ab2a8193c8687f35dfd8e7f707f";
+		String httpArg = fn+"/contributors";
 		List<Contributor> contributors = NetworkConnect.gson.fromJson(NetworkConnect.getJson(httpUrl,httpArg),new TypeToken<List<Contributor>>() {
 		}.getType());
 		if(contributors.size()>10) {
