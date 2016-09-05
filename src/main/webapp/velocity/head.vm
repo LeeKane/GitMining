@@ -25,7 +25,7 @@
 
 
             <ul class="right hide-on-med-and-down" id="user">
-                <li><a href="/GitMining/login" class="waves-effect waves-teal"><i class="material-icons left">perm_identity</i>${username}</a></li>
+                <li><a id="uname" class="waves-effect waves-teal"><i class="material-icons left">perm_identity</i>${username}</a></li>
             </ul>
 
             <ul class="right hide-on-med-and-down">
@@ -57,11 +57,30 @@
 </header>
 <script>
     var user=document.getElementById("user");
-    user.onChange=function(){
-        alert(user.innerHTML);
-##        if(user.innerHTML!="<li><a id="uname" href="/GitMining/login" class="waves-effect waves-teal"><i class="material-icons left">perm_identity</i></a></li>")
-##        {
-##            user.innerHTML="<li><a id="uname" href="/GitMining/login.do" class="waves-effect waves-teal"><i class="material-icons left">perm_identity</i>${username}</a></li>";
-##        }
+//    user.onload==function()
+//    {
+//
+//        var url=location.href;
+//        var tmp1=url.split("?")[1];
+//        var tmp2=tmp1.split("&")[0];
+//        var tmp3=tmp2.split("=")[1];
+//        var parm1=tmp3;
+//
+//    }
+    user.onclick=function(){
+
+
+        if(user.innerText!="perm_identity"){
+
+            var username=user.innerText;
+##          user.innerHTML="<li><a id="uname" href="/GitMining/login.do" class="waves-effect waves-teal"><i class="material-icons left">perm_identity</i>${username}</a></li>";
+            username=username.substring(13);
+            var myurl="/GitMining/login.do"+"?"+"username="+username;
+            window.location.href=myurl;
+                }
+        else
+        {
+            window.location.href="/GitMining/login";
+        }
     }
 </script>
