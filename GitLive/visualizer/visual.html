@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="/gauge.min.js"></script>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="/moment.min.js"></script>
+  <script type="text/javascript">
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1.0', {'packages':['corechart'], 'language': 'en'});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.setOnLoadCallback(drawChart);
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+      // Initialize the gauge of total events.
+      var opts = {
+        lines: 12, // The number of lines to draw
+        angle: 0.15, // The length of each line
+        lineWidth: 0.44, // The line thickness
+        pointer: {
+          length: 0.9, // The radius of the inner circle
+          strokeWidth: 0.035, // The rotation offset
+          color: '#000000' // Fill color
+        },
+        limitMax: 'false',   // If true, the pointer will not go past the end of the gauge
+        colorStart: '#6FADCF',   // Colors
+        colorStop: '#8FC0DA',    // just experiment with them
+        strokeColor: '#E0E0E0',   // to see which ones work best for you
+        generateGradient: true
+      };
+      var target = document.getElementById('total_gauge'); // your canvas element
+      var gauge = new Gauge(target).setOptions(opts); // create gauge
+      gauge.setTextField(document.getElementById('total_text'));
+      gauge.maxValue = 60; // set max gauge value
+      gauge.animationSpeed = 32; // set animation speed (32 is default value)
+
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('datetime', 'Time');
+      data.addColumn('number', 'Total');
+
+      // Set chart options
+      var maxItems = 15;
+      var maxWidth = screen.availWidth - 600;
+      var options = {
+        'title': 'GitHub Events Breakdown',
+        'width': maxWidth > 1000 ? maxWidth : 1000,
+        'height': 300,
+        'animation': {
+          duration: 300,
+          startup: true
+        },
+        'hAxis': {
+          viewWindow: {
+            min: new Date()
+          }
+        }};
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+
+      var initLastMinuteStat = function() {
+        return {
+          timestamp: 0,
+          comments: 0,
+          commits: 0,
+          pr_opened: 0,
+          pr_merged: 0,
+          starred: 0,
+          fork: 0
+        };
+      };
+
+      var timestamp = 0;
+      var existingTypes = {};
+      var lastMinuteStat = initLastMinuteStat();
+      var socket = io.connect(location.origin);
+      socket.on('set_events', function(events) {
+        //console.log(events);
+        //if (events.total == 0)
+        //  return;
+        if (timestamp == events.timestamp)
+          return;
+        timestamp = events.timestamp;
+
+        gauge.set(events.total); // set actual value
+
+        // Update listings.
+        var maxList = 7;
+        var timeFromNow = function(time) {
+          var fromNow = moment(time).fromNow();
+          if (fromNow == 'a few seconds ago')
+            fromNow = Math.floor((new Date() - new Date(time)) / 1000) + ' seconds ago';
+          return fromNow;
+        };
+        var updateListing = function(dict, element) {
+          for (item in dict) {
+            if (element.children.length >= maxList)
+              element.removeChild(element.children[maxList - 1]);
+            element.innerHTML = '<div><div class="list_key" data-timestamp="' + dict[item] + '">' + timeFromNow(dict[item]) + '</div><div class="list_name" title="' + item + '">' + item + '</div></div>' + element.innerHTML;
+          }
+          var timeSpans = element.getElementsByClassName('list_key');
+          for (var i = 0; i < timeSpans.length; i++) {
+            timeSpans[i].innerText = timeFromNow(timeSpans[i].getAttribute('data-timestamp'));
+          }
+        };
+        updateListing(events.new_repo, document.getElementById('new_repo'));
+        updateListing(events.new_branch, document.getElementById('new_branch'));
+
+        var updateTrendListing = function(dict, element) {
+          element.innerHTML = '';
+          for (item in dict) {
+            element.innerHTML += '<div><div class="trend_key">' + dict[item].count + '</div><div class="list_name" title="' + item + '">' + item + '</div></div>';
+          }
+        };
+        if (events.trend) {
+          updateTrendListing(events.trend.repo, document.getElementById('trend_repo'));
+          updateTrendListing(events.trend.user, document.getElementById('trend_user'));
+        }
+
+        // Update stats.
+        var time = new Date().getTime();
+        if (time - lastMinuteStat.timestamp > 60 * 1000) {
+          lastMinuteStat = initLastMinuteStat();
+          lastMinuteStat.timestamp = time;
+        }
+        lastMinuteStat.comments += events.comments;
+        lastMinuteStat.commits += events.commits;
+        lastMinuteStat.pr_opened += events.pr_opened;
+        lastMinuteStat.pr_merged += events.pr_merged;
+        lastMinuteStat.starred += events.starred;
+        lastMinuteStat.fork += events.fork;
+
+        document.getElementById('num_comments').innerText = lastMinuteStat.comments;
+        document.getElementById('num_commits').innerText = lastMinuteStat.commits;
+        document.getElementById('num_pr_opened').innerText = lastMinuteStat.pr_opened;
+        document.getElementById('num_pr_merged').innerText = lastMinuteStat.pr_merged;
+        document.getElementById('num_starred').innerText = lastMinuteStat.starred;
+        document.getElementById('num_fork').innerText = lastMinuteStat.fork;
+        document.getElementById('start_time').innerText = new Date(lastMinuteStat.timestamp).toTimeString().split(' ')[0];
+
+        var row = [new Date(timestamp), events.total];
+        for (type in events.count) {
+          if (existingTypes[type] == null) {
+            data.addColumn('number', type);
+            existingTypes[type] = true;
+          }
+        }
+        for (type in existingTypes) {
+          if (events.count[type])
+            row.push(events.count[type]);
+          else
+            row.push(0);
+        }
+        data.addRows([row]);
+
+        if (data.getNumberOfRows() >= maxItems) {
+          var minDate = data.getValue(data.getNumberOfRows() - maxItems, 0);
+          options.hAxis.viewWindow.min = minDate;
+          if (data.getNumberOfRows() > 300) {
+            data.removeRows(0, data.getNumberOfRows() - maxItems);
+          }
+        }
+        chart.draw(data, options);
+      });
+    }
+  </script>
+  <style type="text/css">
+    body {
+      font-family: Arial;
+    }
+    h1 {
+      margin-bottom: 10px;
+      margin-left: 25px;
+    }
+    .total {
+      float: left;
+      width: 200px;
+      height: 130px;
+    }
+    #total_text {
+      margin: 0 auto;
+      margin-top: -10px;
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+      color: black;
+      font-family: 'Amaranth', sans-serif;
+    }
+    #total_gauge {
+      width: 200px;
+      height: 100px;
+      margin-top: -10px;
+    }
+    .total_desc {
+      text-align: center;
+    }
+    #chart_div {
+      float: left;
+      margin-top: -70px;
+      margin-left: -30px;
+    }
+    .clear {
+      clear: both;
+    }
+    .stat_columns > div {
+      display: inline-block;
+      vertical-align: top;
+      font-family: 'Amaranth', sans-serif;
+      margin-right: 10px;
+    }
+    .stat_columns span {
+      font-size: 1.5em;
+      font-weight: bold;
+      display: block;
+    }
+    .listing {
+      margin-top: 20px;
+    }
+    .listing > div {
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 5px;
+    }
+    .listing > div > div{
+      clear: both;
+    }
+    .list_key {
+      float: left;
+      width: 130px;
+      color: grey;
+    }
+    .trend_key {
+      float: left;
+      width: 40px;
+      color: grey;
+    }
+    .list_name {
+      float: left;
+      width: 240px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .footer {
+      position: absolute;
+      bottom: 0;
+      color: grey;
+      font-size: 0.9em;
+    }
+  </style>
+  <link href="//fonts.googleapis.com/css?family=Amaranth:400,700|Just+Another+Hand" rel="stylesheet" type="text/css">
+  <title>GitLive</title>
+</head>
+
+<body>
+  <h1>GitLive</h1>
+  <table>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+  </table>
+  <div class="top_chart">
+    <div class="total"><div id="total_text"></div><canvas id="total_gauge" width="200" height="100"></canvas><div class="total_desc">Total GitHub Events</div></div>
+    <div id="chart_div"></div>
+  </div>
+  <div class="clear"></div>
+  <div class="stat">
+    <b>Stats in the past minute</b>
+    <div class="stat_columns">
+      <div>Comments <span id="num_comments"></span></div>
+      <div>Commits <span id="num_commits"></span></div>
+      <div>Stars <span id="num_starred"></span></div>
+      <div>Forks <span id="num_fork"></span></div>
+      <div>Pull Requests Opened <span id="num_pr_opened"></span></div>
+      <div>PR Merged <span id="num_pr_merged"></span></div>
+      <div>Starting Time <span id="start_time"></span></div>
+    </div>
+  </div>
+  <div class="listing">
+    <div><b>New Repositories</b><div id="new_repo"></div></div>
+    <div><b>New Branches and Tags</b><div id="new_branch"></div></div>
+    <div><b>Trending Repositories</b><div id="trend_repo"></div></div>
+    <div><b>Trending Users</b><div id="trend_user"></div></div>
+  </div>
+</body>
+</html>
