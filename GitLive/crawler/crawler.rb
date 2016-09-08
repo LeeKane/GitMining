@@ -39,7 +39,7 @@ EM.run do
       }).get({
       :head => {
         'user-agent' => 'githubarchive.org',
-        'Authorization' => 'token ' + 'f087789843135774ebee3cb649f8c1be19b5aacd'
+        'Authorization' => 'token ' + '3a9ec067a3989a6fd9cc6d67e9e357541c30a68d'
       }
     })
 
