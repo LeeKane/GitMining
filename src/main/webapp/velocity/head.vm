@@ -11,8 +11,9 @@
             <li><a href="/GitMining/userStatistics">Statistics</a></li>
             </ul>
             <ul id="dropdown3" class="dropdown-content">
-                <li><a href="/GitMining/language">Discovory</a></li>
+                <li><a href="/GitMining/language">Language</a></li>
                 <li><a href="/GitMining/convention#javascript">Convention</a></li>
+                <li><a href="http://gitmining.net:20004">Stream</a></li>
             </ul>
             <ul id="dropdown4" class="dropdown-content">
                 <li><a href="/GitMining/open">Open Source</a></li>
@@ -33,13 +34,15 @@
             </ul>
 
             <ul class="right hide-on-med-and-down">
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown3">Discovery<i class="material-icons right">arrow_drop_down</i></a>
+                </li>
+            </ul>
+
+            <ul class="right hide-on-med-and-down">
                 <li><a class="dropdown-button" href="#!" data-activates="dropdown4">Location<i class="material-icons right">arrow_drop_down</i></a>
                 </li>
             </ul>
-            <ul class="right hide-on-med-and-down">
-                <li><a class="dropdown-button" href="#!" data-activates="dropdown3">Language<i class="material-icons right">arrow_drop_down</i></a>
-                </li>
-            </ul>
+
 
             <ul class="right hide-on-med-and-down">
                 <li><a class="dropdown-button" href="#!" data-activates="dropdown1">User<i class="material-icons right">arrow_drop_down</i></a>
