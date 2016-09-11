@@ -1,0 +1,55 @@
+#set($layout="statlayout.vm")
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/GitMining/static/web/css/pc.css">
+<link rel="stylesheet" href="/GitMining/static/web/css/sm.css">
+<link rel="stylesheet" href="/GitMining/static/web/css/lc.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js" charset="utf-8"></script>
+<script>window.d3||document.write('<script src="/GitMining/static/web/js/vendors/d3/d3.min.js"><\/script>');</script>
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+<nav class="top-nav">
+    <div class="container">
+        <div class="nav-wrapper"><a class="page-title">Language Discovery</a></div>
+    </div>
+</nav>
+
+<div id="wrapper">
+    <div id="qc">
+        <div id="timeselect"></div>
+    </div>
+    <div id="pc">
+        <div id="tooltip">
+            <div></div>
+        </div>
+    </div>
+    <div id="sm_header">
+        <h2>Top active languages</h2>
+        <h3>A split by language view of active repositories</h3>
+    </div>
+    <div id="sm">
+        <div id="sm_select">
+            <span rel="num">view by total amount</span>
+            <div id="selector">
+                <a href="#" id="num" class="selected">#</a>
+                <a href="#" id="perc">%</a>
+            </div>
+            <span class="right" rel="perc">view by percentage on total</span>
+        </div>
+    </div>
+</div>
+
+<script src="/GitMining/static/web/js/parallelcoordinates.js"></script>
+<script src="/GitMining/static/web/js/smallmultiples.js"></script>
+<script src="/GitMining/static/web/js/linechart.js"></script>
+<script src="/GitMining/static/web/js/main.js"></script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-364839-37', 'auto');
+    ga('send', 'pageview');
+
+</script>
+

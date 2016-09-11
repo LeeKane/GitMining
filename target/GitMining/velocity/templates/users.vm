@@ -1,0 +1,118 @@
+#set($layout="listlayout.vm")
+<nav class="top-nav">
+    <div class="container">
+        <div class="nav-wrapper"><a class="page-title">User List</a></div>
+    </div>
+</nav>
+
+
+<div ng-app="userapp" ng-controller="generalCtrl">
+    <div ng-cloak style="overflow-x: scroll;" ng-controller="generalCtrl">
+        <div class="container">
+            <div class="row">
+                <div id="list" class="section scrollspy">
+
+                    <div class="col s12 m9 l10">
+                        <div class="row">
+##                            <div class="card">
+##                                <label for="search"><i class="material-icons ">search</i></label>
+##                                <div class="input-field">
+##                                    <input id="search" type="search" required>
+##                                </div>
+##                                <div class="row">
+##                                    <div class="search-results"></div>
+##                                </div>
+##                            </div>
+
+    <nav>
+        <div class="nav-wrapper">
+            <form>
+                <div class="input-field">
+                    <input id="search" type="search" required>
+                    <label for="search"><i class="material-icons">search</i></label>
+                </div>
+                <div class="search-results"></div>
+            </form>
+        </div>
+    </nav>
+
+
+    <div class="card">
+                                <ul class="tabs">
+                                    <li class="tab col s2"><a ng-class="{active: isActive.isGen}"
+                                                              ng-click="changeuser(1)">
+                                        General
+                                    </a></li>
+                                    <li class="tab col s2"><a ng-class="{active: isActive.isFollower}"
+                                                              ng-click="changeuser(2)">
+                                        <i class="material-icons center">import_export</i>Follower
+                                    </a></li>
+                                    <li class="tab col s2"><a ng-class="{active: isActive.isRepo}"
+                                                              ng-click="changeuser(3)">
+                                        <i class="material-icons center">import_export</i>Repo</a></li>
+                                </ul>
+                            </div>
+                            <div class="card">
+                                <ul class="collection">
+                                    <div class="userdetails" ng-repeat="user in generalusers | filter:query">
+                                        <div ng-show="!generalusers.length">None avaialble</div>
+                                        <li class="collection-item avatar">
+                                            <img src="https://avatars2.githubusercontent.com/u/{{user.id}}" alt=""
+                                                 class="circle">
+                                                <span class="title">
+                                                    <a href="/GitMining/user/content?id={{user.id}}">{{user.login}}</a>
+                                                </span>
+                                            <p>Joined on {{user.created_at}}<br>
+                                                {{user.type}}
+                                            </p>
+                                            <a href="#!" class="secondary-content">
+                                                <div class="col s12 l6 s6 no-padding">
+                                                    <i class="material-icons">visibility</i>
+                                                    <div class="text-center">
+                                                        {{user.public_repos}}
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 l6 s6 no-padding">
+                                                    <i class="material-icons">thumb_up</i>
+                                                        <span class="text-center">
+                                                            {{user.followers}}
+                                                        </span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </div>
+                                    <tm-pagination conf="paginationConf"></tm-pagination>
+                                    <div style="clear: both;"></div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col hide-on-small-only m3 l2">
+                    <div class="toc-wrapper">
+                        <div style="height: 1px;">
+                            <ul class="section table-of-contents">
+                                <li><a href="#list">
+
+                                #if($result.searchTag.get(0).equals(""))
+                                    <a id="searchkey">Users</a>
+                                #else
+                                    <a id="searchkey">Users : $result.searchTag.get(0)</a>
+                                #end
+                                <!--<li><a href="#activity">Activity</a></li>-->
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/GitMining/static/js/allusers.js"></script>
+<script src="/GitMining/static/js/library/user_pagination.js"></script>
+<script src="/GitMining/static/js/userservice.js"></script>
+<script src="/GitMining/static/jade/search2.js"></script>

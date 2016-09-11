@@ -1,0 +1,86 @@
+
+<header>
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <ul id="dropdown2" class="dropdown-content">
+                <li><a href="/GitMining/repos">Repos</a></li>
+                <li><a href="/GitMining/repoStatistics">Statistics</a></li>
+            </ul>
+            <ul id="dropdown1" class="dropdown-content">
+            <li><a href="/GitMining/users">Users</a></li>
+            <li><a href="/GitMining/userStatistics">Statistics</a></li>
+            </ul>
+            <ul id="dropdown3" class="dropdown-content">
+                <li><a href="/GitMining/language">Discovory</a></li>
+                <li><a href="/GitMining/convention#javascript">Convention</a></li>
+            </ul>
+            <ul id="dropdown4" class="dropdown-content">
+                <li><a href="/GitMining/open">Open Source</a></li>
+                <li><a href="/GitMining/map">Meet</a></li>
+
+            </ul>
+            <a id="logo-container" href="/GitMining/overview" class="brand-logo">
+                <object id="front-page-logo" type="image/svg+xml" data="/GitMining/static/res/materialize.svg">Your browser does not support SVG</object></a>
+
+
+
+            <ul class="right hide-on-med-and-down" id="user">
+                <li><a id="uname" class="waves-effect waves-teal"><i class="material-icons left">perm_identity</i>${username}</a></li>
+            </ul>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/GitMining/about" class="waves-effect waves-teal" id="about">About</a></li>
+            </ul>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown4">Location<i class="material-icons right">arrow_drop_down</i></a>
+                </li>
+            </ul>
+            <ul class="right hide-on-med-and-down">
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown3">Language<i class="material-icons right">arrow_drop_down</i></a>
+                </li>
+            </ul>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1">User<i class="material-icons right">arrow_drop_down</i></a>
+                </li>
+            </ul>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Repo<i class="material-icons right">arrow_drop_down</i></a>
+                </li>
+            </ul>
+
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+</header>
+<script>
+    var user=document.getElementById("user");
+//    user.onload==function()
+//    {
+//
+//        var url=location.href;
+//        var tmp1=url.split("?")[1];
+//        var tmp2=tmp1.split("&")[0];
+//        var tmp3=tmp2.split("=")[1];
+//        var parm1=tmp3;
+//
+//    }
+    user.onclick=function(){
+
+
+        if(user.innerText!="perm_identity"){
+
+            var username=user.innerText;
+##          user.innerHTML="<li><a id="uname" href="/GitMining/login.do" class="waves-effect waves-teal"><i class="material-icons left">perm_identity</i>${username}</a></li>";
+            username=username.substring(13);
+            var myurl="/GitMining/login.do"+"?"+"username="+username;
+            window.location.href=myurl;
+                }
+        else
+        {
+            window.location.href="/GitMining/login";
+        }
+    }
+</script>

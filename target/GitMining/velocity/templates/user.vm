@@ -1,0 +1,166 @@
+<link href="/GitMining/static/css/iso.css" rel="stylesheet">
+<link href="/GitMining/static/css/github.css" media="all" rel="stylesheet"/>
+
+    <nav class="top-nav">
+        <div class="container">
+            <div class="nav-wrapper"><a class="page-title">User</a></div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            <div id="overview" class="section scrollspy">
+                <div class="col s12 m9 l10">
+                    <div class="row">
+                        <div class="col s12 m6 l5">
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="promo" src="https://avatars2.githubusercontent.com/u/$!result.user.id">
+                                </div>
+                                <div class="card-content">
+                                    <table class="bordered">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="vcard-fullname" itemprop="name">$!result.user.name</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="join-label">Joined on </span>
+                                                <local-time class="join-date" datetime=$!result.user.created_at day="numeric"
+                                                            month="short" year="numeric" title="2015年9月14日 GMT+8 上午10:13">
+                                                    $!result.user.created_at
+                                                </local-time>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="vcard-stats border-top border-bottom border-gray-light mb-3 py-3">
+                                                    <a class="vcard-stat" >
+                                                        <strong class="vcard-stat-count d-block">$!result.user.followers</strong>
+                                                        <span class="text-muted">Followers</span>
+                                                    </a>
+                                                    <a class="vcard-stat" >
+                                                        <strong class="vcard-stat-count d-block">$!result.user.public_repos</strong>
+                                                        <span class="text-muted">Starred</span>
+                                                    </a>
+                                                    <a class="vcard-stat" >
+                                                        <strong class="vcard-stat-count d-block">$!result.user.following</strong>
+                                                        <span class="text-muted">Following</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--           -->
+
+
+                        <div class="col s12 m6 l7">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <ul class="tabs">
+                                            <li class="tab col s3"><a class="active" href="#creations">Popular</a></li>
+                                            <li class="tab col s3"><a href="#contributions">Contributions</a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="creations" class="col s12">
+                                        <div class="columns popular-repos">
+                                            <div class="single-column">
+
+                                                <div class="boxed-group flush">
+                                                    <ul class="boxed-group-inner mini-repo-list">
+
+                                                        #foreach( $repo in $result.repos.own_repo)
+                                                        <li class="public source ">
+                                                            <a href="/GitMining/repository/content?id=$!repo.id"
+                                                               class="mini-repo-list-item css-truncate">
+                                                                <svg aria-label="Repository"
+                                                                     class="octicon octicon-repo repo-icon" height="16"
+                                                                     role="img" version="1.1" viewBox="0 0 12 16"
+                                                                     width="12">
+                                                                    <path d="M4 9h-1v-1h1v1z m0-3h-1v1h1v-1z m0-2h-1v1h1v-1z m0-2h-1v1h1v-1z m8-1v12c0 0.55-0.45 1-1 1H6v2l-1.5-1.5-1.5 1.5V14H1c-0.55 0-1-0.45-1-1V1C0 0.45 0.45 0 1 0h10c0.55 0 1 0.45 1 1z m-1 10H1v2h2v-1h3v1h5V11z m0-10H2v9h9V1z"></path>
+                                                                </svg>
+                              <span class="repo-and-owner css-truncate-target">
+                              <span class="repo" title="MoHaMoHa">$!repo.full_name</span>
+                              </span>
+                              <span class="stars">
+                              $!repo.stargazers
+                              <svg aria-label="stars" class="octicon octicon-star" height="16" role="img" version="1.1"
+                                   viewBox="0 0 14 16" width="14"><path
+                                      d="M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z"></path></svg>
+                              </span>
+                                                                <span class="repo-description css-truncate-target">$!repo.description</span>
+                                                            </a>
+                                                        </li>
+                                                            #end
+
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="contributions" class="col s12">
+                                        <div class="columns popular-repos">
+                                            <div class="single-column">
+
+                                                <div class="boxed-group flush">
+                                                    <ul class="boxed-group-inner mini-repo-list">
+
+                                                        #foreach( $repo in $result.repos.contri_repo)
+                                                        <li class="public source ">
+                                                            <a href="/GitMining/repository/content?id=$!repo.id"
+                                                               class="mini-repo-list-item css-truncate">
+                                                                <svg aria-label="Repository"
+                                                                     class="octicon octicon-repo repo-icon" height="16"
+                                                                     role="img" version="1.1" viewBox="0 0 12 16"
+                                                                     width="12">
+                                                                    <path d="M4 9h-1v-1h1v1z m0-3h-1v1h1v-1z m0-2h-1v1h1v-1z m0-2h-1v1h1v-1z m8-1v12c0 0.55-0.45 1-1 1H6v2l-1.5-1.5-1.5 1.5V14H1c-0.55 0-1-0.45-1-1V1C0 0.45 0.45 0 1 0h10c0.55 0 1 0.45 1 1z m-1 10H1v2h2v-1h3v1h5V11z m0-10H2v9h9V1z"></path>
+                                                                </svg>
+<span class="repo-and-owner css-truncate-target">
+<span class="repo" title="MoHaMoHa">$!repo.full_name</span>
+</span>
+<span class="stars">
+$!repo.stargazers
+<svg aria-label="stars" class="octicon octicon-star" height="16" role="img" version="1.1" viewBox="0 0 14 16"
+     width="14"><path d="M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z"></path></svg>
+</span>
+                                                                <span class="repo-description css-truncate-target">$!repo.description</span>
+                                                            </a>
+                                                        </li>
+                                                            #end
+
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col hide-on-small-only m3 l2">
+                <div class="toc-wrapper">
+                    <div style="height: 1px;">
+                        <ul class="section table-of-contents">
+                            <li><a href="#overview">Overview</a></li>
+                            <!--<li><a href="#activity">Activity</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

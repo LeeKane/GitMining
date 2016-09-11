@@ -52,6 +52,7 @@ public class OverviewController {
 		ModelMap result = new ModelMap();
 		result.put("type", "LOGIN");
 		result.put("userName","admin");
+		result.put("info","");
 //		String userName=request.getParameter("");
 //		userName="admin";
 

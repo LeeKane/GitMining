@@ -48,11 +48,17 @@ public class UserInfoDataController {
 
 	@RequestMapping("login.do")
 	public ModelAndView login(HttpSession httpSession, String username, String password){
+		if(username.equals("lk")){
 		List<StarRepo> starRepos=userInfoService.getStaredRepo("kanet77");
 		ModelMap result = new ModelMap();
 		result.put("starRepos", starRepos);
 		httpSession.setAttribute("username",username);
-		return new ModelAndView("person","result",result);
+		return new ModelAndView("person","result",result);}
+		else {
+			ModelMap result = new ModelMap();
+			result.put("info","username or password is wrong");
+			return new ModelAndView("login","result",result);
+		}
 	}
 
 	@RequestMapping(value="/simpleUser")
