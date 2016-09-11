@@ -13,7 +13,11 @@ import com.google.gson.Gson;
 public class NetworkConnect {
 	public static Gson gson = new Gson();
 
+<<<<<<< HEAD
 	public static String token = "3a9ec067a3989a6fd9cc6d67e9e357541c30a68d";
+=======
+	public static String token = "0ac2b35cdc54dbbabcebe6ca135ed743c6a03d28";
+>>>>>>> parent of d5d8933... chart data json
 
 
 	public static String getJson(String httpUrl, String httpArg) {
