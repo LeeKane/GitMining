@@ -15,7 +15,6 @@ public class NetworkConnect {
 	public static String token = "3a9ec067a3989a6fd9cc6d67e9e357541c30a68d";
 
 
-
 	public static String getJson(String httpUrl, String httpArg) {
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 		byte[] data = new byte[1024];
