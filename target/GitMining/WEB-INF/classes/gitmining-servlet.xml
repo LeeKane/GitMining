@@ -74,6 +74,15 @@
 		</property>
 	</bean>
 
+		<!--<mvc:interceptors>-->
+			<!--<mvc:interceptor>-->
+				<!--<mvc:mapping path="/*.htm" />-->
+				<!--<mvc:mapping path="/*/*.htm" />-->
+				<!--<bean class="org.gitmining.util.SystemInitInterceptor"/>-->
+			<!--</mvc:interceptor>-->
+		<!--</mvc:interceptors>-->
+	<!--</bean>-->
+
 	<!-- 处理器 -->
 	<import resource="controller.xml" />
 	<import resource="dao.xml" />
